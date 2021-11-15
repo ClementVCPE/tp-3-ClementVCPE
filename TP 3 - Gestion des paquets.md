@@ -10,10 +10,30 @@ on utilise les commandes : "sudo apt-get upgrade
                             
 2. Créez un alias “maj” de la ou des commande(s) de la question précédente. Où faut-il enregistrer cet
 alias pour qu’il ne soit pas perdu au prochain redémarrage ?
+
+création de l'alias : alias maj='apt-get upgrade && apt-get update'
+
+
+Afin de sauvgarder l'alias même après le démarrage, il faut créer un ficher avec la commande création de votre alias dedans et s'appellant ".bash_aliases". Dans les faits, le fichier ".bashrc" va chercher à executer le fichier .bash_aliases si il existe.
+
 3. Utilisez le fichier /var/log/dpkg.log pour obtenir les 5 derniers paquets installés sur votre machine.
+
+il faut utiliser la commande : 
+ grep apt-get install /var/log/dpkg.log | tail -n5
+
+
 4. Listez les derniers paquets qui ont été installés explicitement avec la commande apt install
+
+grep apt-get install /var/log/apt/history.log
+
+
 5. Utilisez les commandes dpkg et apt pour compter de deux manières différentes le nombre de total de
-paquets installés sur la machine (ne pas hésiter à consulter le manuel !). Comment explique-t-on la
+paquets installés sur la machine (ne pas hésiter à consulter le manuel !).
+
+dpkg -l | wc -l
+apt list -i | wc -l
+
+ Comment explique-t-on la
 (petite) différence de comptage ? Pourquoi ne peut-on pas utiliser directement le fichier dpkg.log ?
 6. Combien de paquets sont disponibles en téléchargement sur les dépôts Ubuntu ?
 7. A quoi servent les paquets glances, tldr et hollywood ? Installez-les et testez-les.
