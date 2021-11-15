@@ -19,7 +19,7 @@ Afin de sauvgarder l'alias même après le démarrage, il faut créer un ficher 
 3. Utilisez le fichier /var/log/dpkg.log pour obtenir les 5 derniers paquets installés sur votre machine.
 
 il faut utiliser la commande : 
- grep apt-get install /var/log/dpkg.log | tail -n5
+ grep apt-get installed /var/log/dpkg.log | tail -5 | cut -d' ' -f5 | cut -d : -f1
 
 
 4. Listez les derniers paquets qui ont été installés explicitement avec la commande apt install
@@ -30,31 +30,71 @@ grep apt-get install /var/log/apt/history.log
 5. Utilisez les commandes dpkg et apt pour compter de deux manières différentes le nombre de total de
 paquets installés sur la machine (ne pas hésiter à consulter le manuel !).
 
-dpkg -l | wc -l
+dpkg -l | grep "^ii" | wc -l
 apt list -i | wc -l
 
  Comment explique-t-on la
 (petite) différence de comptage ? Pourquoi ne peut-on pas utiliser directement le fichier dpkg.log ?
+
+
 6. Combien de paquets sont disponibles en téléchargement sur les dépôts Ubuntu ?
+
+En effectunt la commande "apt liste | wc -l" nous pouvons trouver le nombre de paquets disponibles sur les dépots ubuntu.
+
+
 7. A quoi servent les paquets glances, tldr et hollywood ? Installez-les et testez-les.
+
+Glances est un outil de surveillance systeme
+tldr convertir les pages du man en explications concises
+Hollywood permet de simuler un ecran de hacking flingué.
+
 8. Quels paquets proposent de jouer au sudoku ?
+
+Il s'agit du paquets gnom-sudoku.
 N’installez pas le paquet gnome-sudoku ou ksudoku sous peine de devoir probablement réinstaller
 votre VM
-Exercice 2.
-A partir de quel paquet est installée la commande ls ? Comment obtenir cette information en une
+
+## Exercice 2.
+A partir de quel paquet est installée la commande ls ? 
+
+En utilisant la commande "dpkg -S $(which -a ls)"  le terminal nous renvois le paquet d'origine de la commande ls ; coreutils se situant au chemin suivant : /bin/ls
+Comment obtenir cette information en une
 seule commande, pour n’importe quel programme ? Utilisez la réponse à cette question pour écrire un
 script appelé origine-commande (sans l’extension .sh) prenant en argument le nom d’une commande, et
 indiquant quel paquet l’a installée.
-Exercice 3.
+
+Le script utilisant la commande ci-dessus et prenant en argument le nom d'une commande est le suivant :
+
+#!/bin/bash
+dpkg -S $(which -a $1)
+
+
+## Exercice 3.
 Ecrire une commande qui affiche “INSTALLÉ” ou “NON INSTALLÉ” selon le nom et le statut du package
 spécifié dans cette commande.
-Exercice 4.
-Lister les programmes livrés avec coreutils. En particulier, on remarque que l’un deux se nomme [. De
-quoi s’agit-il ?
-Exercice 5. aptitude
+
+
+## Exercice 4.
+Lister les programmes livrés avec coreutils.
+
+Afin de lister les programmes livrés avec coreutils, il faut utliser la commande "dpkg -L coreutils"
+
+En particulier, on remarque que l’un deux se nomme [. 
+De quoi s’agit-il ?
+
+Cette commande est un operateur booléen qui permet de verifier la validité d'une commande.
+
+## Exercice 5. aptitude
 Installez les paquets emacs et lynx à l’aide de la version graphique d’aptitude (et prenez deux minutes
 pour vous renseigner et tester ces paquets).
-Exercice 6. Installation d’un paquet par PPA
+
+Il faut d'abord installer aptitude avec "apt install aptitude"
+Dans aptitude, il faut faire la recherche des paquets que l'on souhaite installer et appuyer sur la touche + de notre clavier pour les ajouter à notre sélection. De là, aller dans le menu avec "ctrl + t" et selectionner "installer les paquets" et leurs dépendances.
+
+le paquet "emacs" est un éditeur de texte très puissant.
+Le paquet "lynx" est une navigateur web sans interface graphique.
+
+## Exercice 6. Installation d’un paquet par PPA
 Certains logiciels ne figurent pas dans les dépôts officiels. C’est le cas par exemple de la version ”officielle”
 de Java depuis qu’elle est développée par Oracle. Dans ces cas, on peut parfois se tourner vers un ”dépôt
 personnel” ou PPA.
