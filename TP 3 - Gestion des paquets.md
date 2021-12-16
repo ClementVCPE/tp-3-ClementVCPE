@@ -94,6 +94,8 @@ Dans aptitude, il faut faire la recherche des paquets que l'on souhaite installe
 le paquet "emacs" est un éditeur de texte très puissant.
 Le paquet "lynx" est une navigateur web sans interface graphique.
 
+ff
+
 ## Exercice 6. Installation d’un paquet par PPA
 Certains logiciels ne figurent pas dans les dépôts officiels. C’est le cas par exemple de la version ”officielle”
 de Java depuis qu’elle est développée par Oracle. Dans ces cas, on peut parfois se tourner vers un ”dépôt
