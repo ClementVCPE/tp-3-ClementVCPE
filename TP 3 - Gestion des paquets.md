@@ -73,6 +73,11 @@ dpkg -S $(which -a $1)
 Ecrire une commande qui affiche “INSTALLÉ” ou “NON INSTALLÉ” selon le nom et le statut du package
 spécifié dans cette commande.
 
+La commande à faire est la suivante :
+   
+    if apt list --installed | grep -q "ICI ON MET LE MOT CLE"; then echo "INSTALLE"; else echo"NON INSTALLE";fi
+  
+
 
 ## Exercice 4.
 Lister les programmes livrés avec coreutils.
@@ -94,18 +99,33 @@ Dans aptitude, il faut faire la recherche des paquets que l'on souhaite installe
 le paquet "emacs" est un éditeur de texte très puissant.
 Le paquet "lynx" est une navigateur web sans interface graphique.
 
-ff
+
 
 ## Exercice 6. Installation d’un paquet par PPA
+
 Certains logiciels ne figurent pas dans les dépôts officiels. C’est le cas par exemple de la version ”officielle”
 de Java depuis qu’elle est développée par Oracle. Dans ces cas, on peut parfois se tourner vers un ”dépôt
 personnel” ou PPA.
 1. Installer la version Oracle de Java (avec l’ajout des PPA)
+
 sudo add-apt-repository ppa:linuxuprising/java
 sudo apt update
 sudo apt install oracle-java15-installer
+
 2. Vérifiez qu’un nouveau fichier a été créé dans /etc/apt/sources.list.d. Que contient-il ?
+
+Un nouveu fichier à bien été créé
+
+Pour voir ce u'il contient on utilise la commande :
+cat linuxuprising-ubuntu-java-focal.list
+
+Ce fichier contient : 
+deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main
+deb-src http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main
+
+
 Exercice 7. Installation d’un logiciel à partir du code source
+
 Lorsqu’un logiciel n’est disponible ni dans les dépôts officiels, ni dans un PPA, ou encore parce qu’on
 souhaite n’installer qu’une partie de ses fonctionnalités, on peut se tourner vers la compilation du code source.
 C’est ce que nous allons faire ici, avec le programme cbonsai (https://gitlab.com/jallbrit/cbonsai)
