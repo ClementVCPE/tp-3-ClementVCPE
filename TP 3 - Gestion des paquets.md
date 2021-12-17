@@ -122,7 +122,7 @@ cat linuxuprising-ubuntu-java-focal.list
 Ce fichier contient : 
 deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main
 deb-src http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main
-
+d
 
 Exercice 7. Installation d’un logiciel à partir du code source
 
